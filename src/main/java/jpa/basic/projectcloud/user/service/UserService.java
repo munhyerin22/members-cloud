@@ -1,0 +1,32 @@
+package jpa.basic.projectcloud.user.service;
+
+import jpa.basic.projectcloud.user.dto.request.CreateUserRequest;
+import jpa.basic.projectcloud.user.dto.response.UserResponse;
+import jpa.basic.projectcloud.user.entity.User;
+import jpa.basic.projectcloud.user.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+@Transactional(readOnly = true)
+@RequiredArgsConstructor
+public class UserService {
+
+    private final UserRepository userRepository;
+
+    public UserResponse save(CreateUserRequest request) {
+        User user = new User(request.name(), request.age(), request.mbti());
+
+        User savedUser = userRepository.save(user);
+
+        return UserResponse.of(savedUser);
+    }
+
+    public UserResponse getUser(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 사용자는 존재하지 않습니다."));
+
+        return UserResponse.of(user);
+    }
+}

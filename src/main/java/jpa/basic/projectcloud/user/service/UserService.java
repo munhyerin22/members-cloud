@@ -1,5 +1,7 @@
 package jpa.basic.projectcloud.user.service;
 
+import jpa.basic.projectcloud.exception.CustomException;
+import jpa.basic.projectcloud.exception.ErrorCode;
 import jpa.basic.projectcloud.user.dto.request.CreateUserRequest;
 import jpa.basic.projectcloud.user.dto.response.UserResponse;
 import jpa.basic.projectcloud.user.entity.User;
@@ -20,13 +22,13 @@ public class UserService {
 
         User savedUser = userRepository.save(user);
 
-        return UserResponse.of(savedUser);
+        return UserResponse.from(savedUser);
     }
 
     public UserResponse getUser(Long userId) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 사용자는 존재하지 않습니다."));
+                .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER));
 
-        return UserResponse.of(user);
+        return UserResponse.from(user);
     }
 }

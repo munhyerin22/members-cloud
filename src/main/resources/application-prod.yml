@@ -1,0 +1,27 @@
+spring:
+  config:
+    import: "aws-parameterstore:/cloud-app/prod/"
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://your-rds-endpoint:3306/yourdb
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+management:
+  endpoint:
+    health:
+      show-details: never
+  info:
+    env:
+      enabled: true
+
+info:
+  app:
+    message: ${APP_MESSAGE}
+
+logging:
+  level:
+    root: INFO

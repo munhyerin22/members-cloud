@@ -1,14 +1,19 @@
 spring:
   config:
-    import: "aws-parameterstore:/cloud-app/prod/"
+    import: "aws-parameterstore:/cloud-project-app/prod/"
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://your-rds-endpoint:3306/yourdb
+    url: ${DB_URL}
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: validate
+#      ddl-auto: none
+  cloud:
+    aws:
+      s3:
+        bucket: ${BUCKETNAME}
 
 management:
   endpoint:

@@ -35,3 +35,8 @@ out/
 
 ### VS Code ###
 .vscode/
+
+# yml은 git에 안올리는 건데 과제니까 올립니다.
+# application.yml
+# application-local.yml
+# application-prod.yml

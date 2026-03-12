@@ -17,6 +17,8 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    // user 정보 저장(생성)
+    @Transactional // 트러블 슈팅 : readOnly로 설정 후 해당 어노테이션 추가 안해서 save못하는 오류 발생 했었음.
     public UserResponse save(CreateUserRequest request) {
         User user = new User(request.name(), request.age(), request.mbti());
 
@@ -25,6 +27,7 @@ public class UserService {
         return UserResponse.from(savedUser);
     }
 
+    // user 조회 기능
     public UserResponse getUser(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER));

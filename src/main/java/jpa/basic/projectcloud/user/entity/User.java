@@ -22,11 +22,18 @@ public class User {
     @Column(nullable = false)
     String mbti;
 
+    String imageUrl;
+
     @Builder
     public User(String name, int age, String mbti) {
         this.name = name;
         this.age = age;
         this.mbti = mbti;
+    }
+
+    // user처음 생성 시 프로필사진이 존재 하지 않아 따로 생성
+    public void uploadKey(String imageUrl){
+        this.imageUrl = imageUrl;
     }
 }
 

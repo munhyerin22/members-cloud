@@ -14,7 +14,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(CustomException.class)
     public ResponseEntity<ApiResponse<ErrorResponse>> handleException(CustomException exception) {
-        log.error("[API - ERROR] 발생 원인: ", exception);
+        log.error("[API - ERROR] 발생 원인: ", exception); // error관련 log
         ErrorCode errorCode = exception.getErrorCode();
 
         return ResponseEntity.status(errorCode.getStatus())
@@ -23,7 +23,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiResponse<ErrorResponse>> handleMethodArgumentNotValid(MethodArgumentNotValidException exception) {
-        log.error("[API - ERROR] 발생 원인: ", exception);
+        log.error("[API - ERROR] 발생 원인: ", exception); // error관련 log
         ErrorCode errorCode = ErrorCode.INVALID_INPUT_VALUE;
 
         List<FieldError> fieldErrors = exception.getBindingResult()

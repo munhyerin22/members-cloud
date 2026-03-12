@@ -19,15 +19,19 @@ public class UserController {
 
     private final UserService userService;
 
+    // user 생성
     @PostMapping
     public ResponseEntity<ApiResponse<UserResponse>> createUser(
             @Valid @RequestBody CreateUserRequest request) {
+        log.info("[API - LOG] {}",request.name()); // lv1
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(ApiResponse.success(HttpStatus.CREATED, userService.save(request)));
     }
 
+    // user 조회
     @GetMapping("/{userId}")
     public ResponseEntity<ApiResponse<UserResponse>> getUser(@PathVariable Long userId) {
+        log.info("[API - LOG] 조회 요청"); // lv1
         return ResponseEntity.status(HttpStatus.OK)
                 .body(ApiResponse.success(HttpStatus.OK, userService.getUser(userId)));
     }

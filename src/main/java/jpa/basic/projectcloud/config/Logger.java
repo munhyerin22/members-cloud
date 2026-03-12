@@ -13,6 +13,7 @@ public class Logger {
 
     @Before("execution(* jpa.basic.projectcloud.user.controller..*.*(..))")
     public void logApiRequest(JoinPoint joinPoint) {
+        // 메서드 호출 시 log
         log.info("[API - LOG] {} 메서드 호출", joinPoint.getSignature().getName());
     }
 }

@@ -11,6 +11,7 @@ public record UserResponse(
         String mbti
 ) {
 
+    // 사용 시 from으로 간편화
     public static UserResponse from(User user) {
         return UserResponse.builder()
                 .id(user.getId())
